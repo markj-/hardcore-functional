@@ -10,7 +10,7 @@ import log from 'utils/log';
 const apiEndpoint =
   'http://jsonplaceholder.typicode.com/posts';
 
-const templatePost = (title) => `<li>${title}</li>`;
+const templatePost = (title: string) => `<li>${title}</li>`;
 
 const getPostHtml = compose(templatePost, _.prop('title'));
 

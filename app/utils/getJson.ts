@@ -1,6 +1,6 @@
 import Task from 'data.task';
 
-export default (url) => {
+export default (url: string) => {
   return new Task((reject, resolve) => {
     fetch(url)
       .then((response) => {
