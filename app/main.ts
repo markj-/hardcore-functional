@@ -17,7 +17,7 @@ const getPostHtml = compose(templatePost, _.prop('title'));
 
 const getPostsHtml = compose(_.join(''), map(getPostHtml));
 
-const displayPosts = compose(setHtml('.posts'), getPostsHtml));
+const displayPosts = compose(setHtml('.posts'), getPostsHtml);
 
 const input = document.querySelector('input');
 
