@@ -5,8 +5,8 @@ import {
   map
 } from 'pointfree-fantasy';
 import getEventValue from 'utils/get-event-value';
-import setHtml from 'utils/setHtml';
-import getJson from 'utils/getJson';
+import setHtml from 'utils/set-html';
+import getJson from 'utils/get-json';
 import log from 'utils/log';
 
 const apiEndpoint: string = 'http://jsonplaceholder.typicode.com/posts';
