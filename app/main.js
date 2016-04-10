@@ -18,7 +18,5 @@ const getPostsHtml = compose(_.join(''), map(getPostHtml));
 
 const displayPosts = compose(setHtml('.posts'), getPostsHtml));
 
-const getPosts = getJson(apiEndpoint);
-
-getPosts()
+getJson(apiEndpoint)
   .fork(log, displayPosts);
