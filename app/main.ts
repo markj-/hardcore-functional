@@ -7,8 +7,7 @@ import setHtml from 'utils/setHtml';
 import getJson from 'utils/getJson';
 import log from 'utils/log';
 
-const apiEndpoint =
-  'http://jsonplaceholder.typicode.com/posts';
+const apiEndpoint: string = 'http://jsonplaceholder.typicode.com/posts';
 
 const templatePost = (title: string) => `<li>${title}</li>`;
 
