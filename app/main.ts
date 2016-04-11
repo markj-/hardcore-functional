@@ -4,10 +4,13 @@ import {
   compose,
   map
 } from 'pointfree-fantasy';
+import io from 'utils/io';
 import getEventValue from 'utils/get-event-value';
 import setHtml from 'utils/set-html';
 import getJson from 'utils/get-json';
 import log from 'utils/log';
+
+io.extendFn();
 
 const apiEndpoint: string = 'http://jsonplaceholder.typicode.com/posts';
 
@@ -19,18 +22,18 @@ const getPostsHtml = compose(_.join(''), map(getPostHtml));
 
 const displayPosts = compose(setHtml('.posts'), getPostsHtml);
 
-const input = document.querySelector('input');
+const getDom = document.querySelector.bind(document).toIO();
 
-const listen = _.curry((event, element) => {
-  return () => {
-    return Rx.Observable.fromEvent(element, event);
-  }
+const listen = _.curry((event: string, element: HTMLElement) => {
+  return Rx.Observable.fromEvent(element, event);
 });
 
-const inputKeysStream = listen('keyup', input);
-
-inputKeysStream()
-  .subscribe(compose(log, getEventValue), log));
+const logEventValue = compose(log, getEventValue);
 
 getJson(apiEndpoint)
   .fork(log, displayPosts);
+
+getDom('input')
+  .map(listen('keyup'))
+  .runIO()
+  .subscribe(logEventValue, log);
