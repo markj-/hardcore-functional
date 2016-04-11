@@ -1,9 +1,9 @@
-import Rx from 'rxjs';
 import _ from 'ramda';
 import {
   compose,
   map
 } from 'pointfree-fantasy';
+import listen from 'utils/listen';
 import io from 'utils/io';
 import getEventValue from 'utils/get-event-value';
 import setHtml from 'utils/set-html';
@@ -23,10 +23,6 @@ const getPostsHtml = compose(_.join(''), map(getPostHtml));
 const displayPosts = compose(setHtml('.posts'), getPostsHtml);
 
 const getDom = document.querySelector.bind(document).toIO();
-
-const listen = _.curry((event: string, element: HTMLElement) => {
-  return Rx.Observable.fromEvent(element, event);
-});
 
 const logEventValue = compose(log, getEventValue);
 
