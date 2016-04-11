@@ -21,13 +21,13 @@ const displayPosts = compose(setHtml('.posts'), getPostsHtml);
 
 const input = document.querySelector('input');
 
-const listen = (element, event) => {
+const listen = _.curry((event, element) => {
   return () => {
     return Rx.Observable.fromEvent(element, event);
   }
-};
+});
 
-const inputKeysStream = listen(input, 'keyup');
+const inputKeysStream = listen('keyup', input);
 
 inputKeysStream()
   .subscribe(compose(log, getEventValue), log));
