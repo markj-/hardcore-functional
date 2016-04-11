@@ -21,9 +21,16 @@ const displayPosts = compose(setHtml('.posts'), getPostsHtml);
 
 const input = document.querySelector('input');
 
-const keyupStream = Rx.Observable.fromEvent(input, 'keyup');
+const listen = (element, event) => {
+  return () => {
+    return Rx.Observable.fromEvent(element, event);
+  }
+};
+
+const inputKeysStream = listen(input, 'keyup');
+
+inputKeysStream()
+  .subscribe(compose(log, getEventValue), log));
 
 getJson(apiEndpoint)
   .fork(log, displayPosts);
-
-keyupStream.subscribe(compose(log, getEventValue), log);
